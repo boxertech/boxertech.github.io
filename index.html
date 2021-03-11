@@ -30,7 +30,7 @@
             ar1 = (typeof ar1 === "string") ? _.map(ar1.split(","), item => item.trim()) : ar1;
             ar2 = (typeof ar2 === "string") ? _.map(ar2.split(","), item => item.trim())  : ar2;
             var ar3 = _.union(ar1, ar2);
-            arrayThree.value = ar3.join(",");
+            arrayThree.value = ar3; // .join(",");
         }
     </script>
 </body>
