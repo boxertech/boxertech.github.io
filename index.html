@@ -1,1 +1,36 @@
-echo "Hello World";
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        Array 1
+        <textarea name="array1" id="array1" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        Array 2
+        <textarea name="array2" id="array2" cols="30" rows="10"></textarea>
+    </div>
+    <div>
+        <button id="btn1">Merge</button>
+    </div>
+    <div>
+        De-Duped and Merged Array
+        <textarea name="array3" id="array3" cols="30" rows="10"></textarea>
+    </div>
+    <script>
+        var mergeBtn = document.getElementById("btn1");
+        mergeBtn.addEventListener("click", mergeClick, false);
+        // mergeBtn.onClick = mergeClick;
+        function mergeClick() {
+            var arrayOne = document.getElementById('array1');
+            var arrayTwo = document.getElementById('array2');
+            var arrayThree = document.getElementById('array3');
+            var ar1 = (arrayOne && arrayOne.value) ? arrayOne.value : null;
+            var ar2 =  (arrayTwo && arrayTwo.value) ? arrayTwo.value : null;
+            ar1 = (typeof ar1 === "string") ? _.map(ar1.split(","), item => item.trim()) : ar1;
+            ar2 = (typeof ar2 === "string") ? _.map(ar2.split(","), item => item.trim())  : ar2;
+            var ar3 = _.union(ar1, ar2);
+            arrayThree.value = ar3.join(",");
+        }
+    </script>
+</body>
