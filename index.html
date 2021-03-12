@@ -15,6 +15,10 @@
             Merge For isForJson
             <input type="checkbox" id="isForJson" value="false" />
         </label>
+        <label for="isForJson">
+            Add line breaks
+            <input type="checkbox" id="addLineBreaks" value="true" />
+        </label>
         <button id="btn1">Merge</button>
     </div>
     <div>
@@ -29,14 +33,27 @@
             var arrayOne = document.getElementById('array1');
             var arrayTwo = document.getElementById('array2');
             var arrayThree = document.getElementById('array3');
-            var isForJson = !!document.getElementById('isForJson').value;
+            var isForJsonElem = document.getElementById('isForJson');
+            var isForJsonElem2 = document.querySelector('#isForJson');
+            var addLineBreaksElem = document.getElementById('addLineBreaks');
+            var isForJson = !!document.getElementById('isForJson').checked;
+            var addLineBreaks = !!document.getElementById('addLineBreaks').checked;
             var ar1 = (arrayOne && arrayOne.value) ? arrayOne.value : null;
             var ar2 =  (arrayTwo && arrayTwo.value) ? arrayTwo.value : null;
+            // console.log('arrayOne: ', encodeURI(ar1));
             ar1 = (typeof ar1 === "string") ? _.map(ar1.split(","), item => item.trim()) : ar1;
             ar2 = (typeof ar2 === "string") ? _.map(ar2.split(","), item => item.trim()) : ar2;
             var ar3 = _.union(ar1, ar2);
             if (isForJson) {
-                ar3 = _.map(ar3, item => `\"${item}\"`);
+            ar3 = _.map(ar3, item => `\"${item}\"`);
+            }
+            if (addLineBreaks) {
+                ar3 = _.map(ar3, (item, index) => {
+                    if (index === 0) {
+                        return item;
+                    }
+                    return decodeURI(`%0A${item}`);
+                });
             }
             // console.log('ar3: ', ar3);
             arrayThree.value = ar3;
